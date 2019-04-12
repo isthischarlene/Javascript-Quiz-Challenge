@@ -5,196 +5,139 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Javascript Challenge Quiz</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <link href="https://fonts.googleapis.com/css?family=Cardo" rel="stylesheet">
     </head>
     <body>
-        <div id="start"></div>
+        <div class="quizContainer">
+        <div class="sidebars" id="sidebar1"></div>
+
+        <div class="sidebars" id="sidebar2">
         <h1>Harry Potter Quiz</h1>
-        <p>How well do you know Harry Potter? Take the quiz below to find out!</p>
+        <h4> How well do you know Harry Potter? Take the quiz below to find out!</h4> 
+            <form>
+                <div>
+                <div id="quiz"></div>
+                <input type="submit" name ="quizResults" id="submitBtn" onclick= >
+                </div>
+            </form>
+        </div>
         
-        <div id=quiz>
-        <h5 id="question"></h5>
-        <div id="quiz"></div>
-            <label><input type="radio" value="A" name="options" id="optionA"></label><br>
-            <label><input type="radio" value="B" id="optionB" name="options"></label><br>
-            <label><input type="radio" value="C" id="optionC" name="options"></label><br>
-            <label><input type="radio" value="D" id="optionD" name="options"></label><br>
+        <div class="sidebars" id="sidebar3">
+            <p id="score"></p>
+        </div>
 
-        <button id="nextQuest" value="next-quest" onClick="click('here');">Next Question</button>
-
-        <button onclick="returnScore()">View Results</button>
-        <div id="resultsPage"></div>
-
+        <div class="sidebars" id="sidebar4">
+            
+        </div>
+        
         <script>
-             let questions = [ 
-                { question: "What is the name of Harry's owl?",
-                  optionA: "a)Hedwig",
-                  optionB: "b)Hogwarts",
-                  optionC: "c)Headwing",
-                  optionD: "d)Hagrid",
-                  answer: "a"
-            },  { question: "What do Hermione's parents do for a living?",
-                  optionA: "a)Lawyers",
-                  optionB: "b)Dentists",
-                  optionC: "c)Artists",
-                  optionD: "d)Doctors",
-                  answer: "b"
-            },  { question: "Who killed Cedirc Diggory?",
-                  optionA: "a)Cho Chang",
-                  optionB: "b)Prof. Umbridge",
-                  optionC: "c)Peter Pettigrew",
-                  optionD: "d) Draco Malfoy",
-                  answer: "c"
-            },  { question: "Who is Tom Marvolo Riddle",
-                  optionA: "a)Rubeus Hagrid",
-                  optionB: "b)Newt Scamander",
-                  optionC: "c) Barty Crouch Jr.",
-                  optionD: "d) Lord Voldemort",
-                  answer: "d"
-            },  { question: "What guards Azkaban Prison? ",
-                  optionA: "a)Elves",
-                  optionB: "b)Dementors",
-                  optionC: "c)Dragons",
-                  optionD: "d)Boggarts",
-                  answer: "b"
-            },  { question: "Who is the second oldest Weasley?",
-                  optionA: "a)Bill",
-                  optionB: "b)Percy",
-                  optionC: "c)Charlie",
-                  optionD: "d)Ron",
-                  answer: "c"
-            },  { question: "Which of these is not an Unforgivable Curse?",
-                  optionA: "a)Avada Kedava",
-                  optionB: "b)Crucio",
-                  optionC: "c)Imperio",
-                  optionD: "d)Revelio",
-                  answer: "d"
-            },  { question: "What is the name of the Black Family house elf?",
-                  optionA: "a)Kreacher",
-                  optionB: "b)Dobby",
-                  optionC: "c)Winky",
-                  optionD: "d)Sirius",
-                  answer: "a"
-            },  { question: "What spell is used to help get rid of a boggart?",
-                  optionA: "a)Wingardium Leviosa",
-                  optionB: "b)Avada Kedava",
-                  optionC: "c)Ridikulos",
-                  optionD: "d)Expelliamus",
-                  answer: "c"
-            },  { question: "Which two teams played in the 422nd Quiddicth World Cup?",
-                  optionA: "a)Austria vs New Zealand",
-                  optionB: "b)Switzerland vs Denmark",
-                  optionC: "c)Belgium vs Ivory Coast",
-                  optionD: "d)Bulgaria vs Ireland",
-                  answer: "d"
-            },  { question: "Who was the first person petrified in Chamber of Secrets book?",
-                  optionA: "a)Hermione Granger",
-                  optionB: "b)Penelope Clearwater",
-                  optionC: "c)Luna Lovegood",
-                  optionD: "d)Colin Creevey",
-                  answer: "d"
-            },  { question: "What is a squib?",
-                  optionA: "a)A magical person who has non-magical parents",
-                  optionB: "b)A type of plant for a healing potion",
-                  optionC: "c)Non-magical person who is born to at least one magical parent  ",
-                  optionD: "d)A wand made from a special type of wood",
-                  answer: "c"
-            },  { question: "What is Nearly Headless Nick's real name?",
-                  optionA: "a)Nicholas de Mimsy-Porpington",
-                  optionB: "b)Nick Popped Poppington",
-                  optionC: "c)Nicholas Nearless Poppington",
-                  optionD: "d)Nicholas de Memsy-Porpington",
-                  answer: "a"
-            },  { question: "Who below is a Death Eater?",
-                  optionA: "a)Remus Lupin",
-                  optionB: "b)Fenrir Greyback",
-                  optionC: "c)Molly Weasley",
-                  optionD: "d)Nymphodora Tonks",
-                  answer: "b"
-            },  { question: "How do you free a house elf?",
-                  optionA: "a)You give the elf a hug ",
-                  optionB: "b)You give them a can of food",
-                  optionC: "c)You give them an item of clothing",
-                  optionD: "d)You give them a pat on the head",
-                  answer: "c"
-            },  { question: "What is Hogwarts Motto?",
-                  optionA: "a)Ante Deum Asto",
-                  optionB: "b)Never tickle a sleeping dragon",
-                  optionC: "c)Audemus jura nostra defendere",
-                  optionD: "d)Giggling dragons full of fun",
-                  answer: "b"
-            },  { question: "What is an animagus?",
-                  optionA: "a)A witch or wizard who can’t morph him or herself into an animal at will",
-                  optionB: "b)Latin word for animal",
-                  optionC: "c)A witch or wizard who can morph him or herself into an animal at will",
-                  optionD: "d)A type of animal fungus used to make potions",
-                  answer: "c"
-            },  { question: "What is the name of the mirror where you see what you most desire?",
-                  optionA: "a)Mirror of True Reflections",
-                  optionB: "b)Mirror of Erised",
-                  optionC: "c)Mirror of Cupidine Speculum.",
-                  optionD: "d)The mirror does not exist",
-                  answer: "b"
-            },  { question: "Which of these is not a Horcrux?",
-                  optionA: "a)Godric Gryffindor's Sword",
-                  optionB: "b)Nagini the snake",
-                  optionC: "c)Tom Riddle’s Diary",
-                  optionD: "d)Rowena Ravenclaw’s Diagem ",
-                  answer: "a"
-            },  { question: "What creature is the emblem for Hufflepuff House?",
-                  optionA: "a)A lion",
-                  optionB: "b)A badger",
-                  optionC: "c)A raven",
-                  optionD: "d)A squirrel",
-                  answer: "b"
-                },  
-            ];
+            let questions =  [
+                        {question: "What is the name of Harry Potter's owl?",
+                        options: ["Hedwing","Hogwarts","Harriet","Hagrid"],
+                        },
+                        { question: "What do Hermione's parents do for a living?",
+                        options: ["Lawyers","Dentists","Artists","Doctors"],
+                        },
+                        { question: "Who killed Cedric Diggory?",
+                        options: ["Cho Chang","Professor Umbridge","Peter Pettigrew","Draco Malfoy"],
+                        },
+                        { question: "Who is Tom Marvolo Riddle?",
+                        options: [ "Rubeus Hagrid","Newt Scamander","Barty Crouch Jr.","Lord Voldemort"],
+                        },
+                        { question: "Who is Tom Marvolo Riddle?",
+                        options: [ "Rubeus Hagrid","Newt Scamander","Barty Crouch Jr.","Lord Voldemort"],
+                        },
+                        { question: "Who is Tom Marvolo Riddle?",
+                        options: [ "Rubeus Hagrid","Newt Scamander","Barty Crouch Jr.","Lord Voldemort"],
+                        },
+                        { question: "Who is Tom Marvolo Riddle?",
+                        options: [ "Rubeus Hagrid","Newt Scamander","Barty Crouch Jr.","Lord Voldemort"],
+                        },
+                        { question: "Who is Tom Marvolo Riddle?",
+                        options: [ "Rubeus Hagrid","Newt Scamander","Barty Crouch Jr.","Lord Voldemort"],
+                        },
+                        { question: "Who is Tom Marvolo Riddle?",
+                        options: [ "Rubeus Hagrid","Newt Scamander","Barty Crouch Jr.","Lord Voldemort"],
+                        },
+                        { question: "Who is Tom Marvolo Riddle?",
+                        options: [ "Rubeus Hagrid","Newt Scamander","Barty Crouch Jr.","Lord Voldemort"],
+                        },
+                        { question: "Who is Tom Marvolo Riddle?",
+                        options: [ "Rubeus Hagrid","Newt Scamander","Barty Crouch Jr.","Lord Voldemort"],
+                        },
+                        { question: "Who is Tom Marvolo Riddle?",
+                        options: [ "Rubeus Hagrid","Newt Scamander","Barty Crouch Jr.","Lord Voldemort"],
+                        },
+                        { question: "Who is Tom Marvolo Riddle?",
+                        options: [ "Rubeus Hagrid","Newt Scamander","Barty Crouch Jr.","Lord Voldemort"],
+                        },
+                        { question: "Who is Tom Marvolo Riddle?",
+                        options: [ "Rubeus Hagrid","Newt Scamander","Barty Crouch Jr.","Lord Voldemort"],
+                        },
+                        { question: "Who is Tom Marvolo Riddle?",
+                        options: [ "Rubeus Hagrid","Newt Scamander","Barty Crouch Jr.","Lord Voldemort"],
+                        },
+                        { question: "Who is Tom Marvolo Riddle?",
+                        options: [ "Rubeus Hagrid","Newt Scamander","Barty Crouch Jr.","Lord Voldemort"],
+                        },
+                        { question: "Who is Tom Marvolo Riddle?",
+                        options: [ "Rubeus Hagrid","Newt Scamander","Barty Crouch Jr.","Lord Voldemort"],
+                        },
+                        { question: "Who is Tom Marvolo Riddle?",
+                        options: [ "Rubeus Hagrid","Newt Scamander","Barty Crouch Jr.","Lord Voldemort"],
+                        },
+                        { question: "Who is Tom Marvolo Riddle?",
+                        options: [ "Rubeus Hagrid","Newt Scamander","Barty Crouch Jr.","Lord Voldemort"],
+                        },
+                        { question: "Who is Tom Marvolo Riddle?",
+                        options: [ "Rubeus Hagrid","Newt Scamander","Barty Crouch Jr.","Lord Voldemort"],
+                        },
+                        { question: "Who is Tom Marvolo Riddle?",
+                        options: [ "Rubeus Hagrid","Newt Scamander","Barty Crouch Jr.","Lord Voldemort"],
+                        },
+                        { question: "Who is Tom Marvolo Riddle?",
+                        options: [ "Rubeus Hagrid","Newt Scamander","Barty Crouch Jr.","Lord Voldemort"],
+                        },
+                        { question: "Who is Tom Marvolo Riddle?",
+                        options: [ "Rubeus Hagrid","Newt Scamander","Barty Crouch Jr.","Lord Voldemort"],
+                        },
+                        { question: "Who is Tom Marvolo Riddle?",
+                        options: [ "Rubeus Hagrid","Newt Scamander","Barty Crouch Jr.","Lord Voldemort"],
+                        },
+
+
+
+
+
+                        ];
+
+            function showQuiz () {
+                    let quiz = document.getElementById("quiz");
+                        for (let i=0; i<questions.length; i++) {
+                            quiz.innerHTML += '<h5>'+ questions[i].question + '</h5>';
+                            quiz.innerHTML += '<input type="radio" name="options-' + i + '" value="A">' + questions[i].options[0] + '<br>';
+                            quiz.innerHTML += '<input type="radio" name="options-' + i + '" value="B">' + questions[i].options[1] + '<br>';
+                            quiz.innerHTML +=  '<input type="radio" name="options-' + i + '" value="C">' + questions[i].options[2] + '<br>';
+                            quiz.innerHTML +=  '<input type="radio" name="options-' + i + '" value="D">' + questions[i].options[3] + '<br>';
+                }
+            }
+            showQuiz();
+
+            let answers = ['A','B','C','D'];
+            let correctResponses = 0;
+            let results = [];
+            let responses = document.getElementsByName("options-' + i + '");
             
-            let correctAnswers = ["a","b","c","d","b","c","d","a","c","d","d","c","a","b","c","b","c","b","a","b",]
-
-            let start = document.getElementById("start");
-            let question = document.getElementById("question");
-            let optionA = document.getElementById("optionA");
-            let optionB = document.getElementById("optionB");
-            let optionC = document.getElementById("optionC");
-            let optionD = document.getElementById("optionD");
-            let finalScore = document.getElementById("finalScore");
-
-            let nextQuest = document.getElementById("nextQuest");
-            
-            function quizFill() {
-                  document.getElementById('question').innerHTML = questions[0].question
+            function results () {
+            for (let i=0; i<questions.length; i++) {
+                results.push(responses);
             }
+        }
 
-            quizFill();
+            console.log(responses);
 
-            function formFill(){
-                  for (question of questions) {
-                  document.getElementById('optionA').innerHTML = questions[0].optionA
-                  document.getElementById('optionB').innerHTML = questions[1].optionB
-                  document.getElementById('optionC').innerHTML = questions[2].optionC
-                  document.getElementById('optionD').innerHTML = questions[3].optionD
-                  }
-            }
-
-            function markQuiz () {
-            for (i=0; i<questions.length, i++){
-            if (userChoices==currentQuestion.correctAnswer) {
-                  score++;
-            }
-            }
-
-            functions quizResults () {
-            if ((total >=0) && (total <=5)){
-                 document.write("Avada Kedava! You don't deserve to live!");
-             } else if ((total >=16) && (total <=10)){
-                document.write("Sending you straight to Azkaban. Life without chance of parole.")
-             } else if ((total >=11) && (total <=15)){
-                document.write("Well Done! 10 points for Gryffindor!")
-             } else if ((total >=16) && (total <=20)){
-                document.write("You really are the brightest witch of our age")
-             }
-            }
 
 
         </script>
