@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Javascript Challenge Quiz</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <link href="https://fonts.googleapis.com/css?family=Cardo" rel="stylesheet">-->
+    </head>
+    <body>
+        <div class="quizContainer">
+        <div class="sidebars" id="sidebar1"></div>
+
+        <div class="sidebars" id="sidebar2">
+        <h1>Harry Potter Quiz</h1>
+        <h4> How well do you know Harry Potter? Take the quiz below to find out!</h4> 
+            <form>
+                <div>
+                <div id="quiz"></div>
+                <button name ="quizResults" id="submitBtn" onclick="showResults()" >Submit Quiz</button>
+                </div>
+            </form>
+        </div>
+        
+        <div class="sidebars" id="sidebar3">
+            <p id="score"></p>
+        </div>
+
+        <div class="sidebars" id="sidebar4">
+            
+        </div>
+        
+        <script>
+            let questions =  [
+                        {question: "What is the name of Harry Potter's owl?",
+                        options: ["Hedwing","Hogwarts","Harriet","Hagrid"],
+                        },
+                        { question: "What do Hermione's parents do for a living?",
+                        options: ["Lawyers","Dentists","Artists","Doctors"],
+                        },
+                        { question: "Who killed Cedric Diggory?",
+                        options: ["Cho Chang","Professor Umbridge","Peter Pettigrew","Draco Malfoy"],
+                        },
+                        { question: "Who is Tom Marvolo Riddle?",
+                        options: [ "Rubeus Hagrid","Newt Scamander","Barty Crouch Jr.","Lord Voldemort"],
+                        },
+                        { question: "What guards Azkaban Prison?",
+                        options: [ "Elves","Dementors","Dragons","Boggarts"],
+                        },
+                        { question: "Who is the second oldest Weasley?",
+                        options: [ "Bill","Percy","Charlie","Ron"],
+                        },
+                        { question: "Which of these is not an Unforgivable Curse?",
+                        options: [ "Avada Kedavra","Crucio","Imperio","Revelio"],
+                        },
+                        { question: "What is the name of the Black Family house elf?",
+                        options: [ "Kreacher","Dobby","Elfie","Sirius"],
+                        },
+                        { question: "What spell is used to help get rid of a boggart?",
+                        options: [ "Wingardium Leviosa","Avada Kedava","Ridikulos","Expelliamus"],
+                        },
+                        { question: "Which two teams played in the 422nd Quiddicth World Cup?",
+                        options: [ "Austria vs New Zealand","Switzerland vs Denmark","Belgium vs Ivory Coast","Bulgaria vs Ireland"],
+                        },
+                        { question: "Who was the first person petrified in Chamber of Secrets book?",
+                        options: [ "Hermione Granger","Penelope Clearwater","Luna Lovegood","Coliin Creevey"],
+                        },
+                        { question: "What is a squib?",
+                        options: [ "A magical person who has non-magical parents","A type of plant for a healing potion","Non-magical person who is born to at least one magical parent","A wand made from a special type of wood"],
+                        },
+                        { question: "What is Nearly Headless Nick's real name?",
+                        options: [ "Nicholas de Mimsy-Porpington","Nick Popped Poppington","Nicholas Nearless Poppington","Nicholas de Memsy-Porpington"],
+                        },
+                        { question: "Who below is a Death Eater?",
+                        options: [ "Remus Lupin","Fenrir Greyback","Molly Weasley","Nymphodora Tonks"],
+                        },
+                        { question: "How do you free a house elf?",
+                        options: [ "You give the elf a hug","You give them a can of food","You give them an item of clothing","You give them a pat on the head"],
+                        },
+                        { question: "What is Hogwart's Motto?",
+                        options: [ "Ante Deum Asto","Never tickle a sleeping dragon","Audemus jura nostra defendere","Giggling dragons are full of fun"],
+                        },
+                        { question: "What is an animagus?",
+                        options: [ "A witch or wizard who can’t morph him or herself into an animal at will","Latin word for animal", "A witch or wizard who can morph him or herself into an animal at will","A type of animal fungus used to make potions"],
+                        },
+                        { question: "What is the name of the mirror where you see what you most desire?",
+                        options: [ "Mirror of True Reflections","Mirror of Erised","Mirror of Cupidine Speculum","The mirror does not exist"],
+                        },
+                        { question: "Which of these is not a Horcrux?",
+                        options: [ "Godric Gryffindor's Sword","Nagini the snake","Tom Riddle’s Diary","Rowena Ravenclaw’s"],
+                        },
+                        { question: "What creature is the emblem for Hufflepuff House?",
+                        options: [ "A lion","A badger","A raven","A squirrel"],
+                        },
+                        ];
+
+                let answers = ['A','B','C','D','A','B','C','D','A','B','C','D','A','B','C','D','A','B','C','D',];
+                let userScore = 0;
+                let userResponses = [];
+
+            function showQuiz () {
+                    let quiz = document.getElementById("quiz");
+                        for (let i=0; i<questions.length; i++) {
+                            quiz.innerHTML += '<h5>'+ questions[i].question + '</h5>';
+                            quiz.innerHTML += '<input type="radio" name="options-' + i + '" value="A">' + questions[i].options[0] + '<br>';
+                            quiz.innerHTML += '<input type="radio" name="options-' + i + '" value="B">' + questions[i].options[1] + '<br>';
+                            quiz.innerHTML +=  '<input type="radio" name="options-' + i + '" value="C">' + questions[i].options[2] + '<br>';
+                            quiz.innerHTML +=  '<input type="radio" name="options-' + i + '" value="D">' + questions[i].options[3] + '<br>';
+                }
+            }
+            showQuiz();
+
+            function collectScore () {
+                for (let i=0; i<questions.length; i++) {
+                    let responses = document.querySelectorAll(":checked");
+                    userResponses.push(selected);
+                }
+                console.log(selected);
+                }
+
+                function calResult() {
+                    for (i=0; i< questions.length; i++) {
+                        if (userResponses[i] == answers[i]) {
+                            userScore++;
+                        }
+                    }
+                    console.log(userScore);
+                }
+
+            function showResults() {
+            document.getElementById("submitBtn").addEventListener('click', function(event) {
+                event.preventDefault();
+                
+                collectScore();
+                calResult();
+                document.getElementById("score").innerHTML = "You scored: ". userScore / questions.length;
+              
+            });
+        }
+
+        </script>
+    </body>
+</html>
